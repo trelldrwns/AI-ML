@@ -1,0 +1,34 @@
+Help the rat escape the unnder ground pipe network
+
+vast underground pipe network is a SSG or a tree
+
+junctions and connections
+juntions are states
+pipe connections   are edges
+
+edge and junctions havbe costs
+
+crawling through these has costs
+
+path costs more time
+
+write a program to find a path from the starting junction to the end to find the cheese
+
+goal state is the end
+
+and the start state is the first junction
+
+
+change based on your own interests.
+
+use search algorithms that you think are good
+
+example - breadth first search
+          depth first search
+          depth limited search
+          iterative deepening search
+          uniform cost search
+
+input - RHS is important
+        no of junctions and pipes
+        refer to the problem statement pdf for more info.
