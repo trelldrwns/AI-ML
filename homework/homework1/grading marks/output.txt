@@ -1,0 +1,21 @@
+Enter the name of the student 1: ball 
+Enter the name of the student 2: balls
+Enter the name of the student 3: baller
+Entering marks for ball
+Enter marks for ball in Math: 65
+Enter marks for ball in Science: 79  
+Enter marks for ball in English: 490
+ERROR: Enter marks between 0-100.
+Enter marks for ball in English: 39
+Entering marks for balls
+Enter marks for balls in Math: 69
+Enter marks for balls in Science: 40
+Enter marks for balls in English: 30
+Entering marks for baller
+Enter marks for baller in Math: 96
+Enter marks for baller in Science: 43
+Enter marks for baller in English: 23
+Student: ball, Marks: {'Math': 65, 'Science': 79, 'English': 39}, Total: 183
+Student: balls, Marks: {'Math': 69, 'Science': 40, 'English': 30}, Total: 139
+Student: baller, Marks: {'Math': 96, 'Science': 43, 'English': 23}, Total: 162
+The student with the highest marks is ball with a total marks of 183
