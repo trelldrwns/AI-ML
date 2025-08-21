@@ -1,0 +1,23 @@
+ASSIGNMENT ONE INTRODUCTION TO AI & ML.
+
+implement a bot that bascially takes you around the university with a tree path, has 12 nodes, uses search algorithms, refer to PDF.
+
+currently thinking -
+
+MAP the entire university, then make the dictionary with lists, for all the nodes.
+
+post map make classes for all four search algorithms
+
+use classes to sample and get results to check if its working, report here based on efficiency and other parametres.
+    time based opening and closing schedule for the buildings
+
+now start with implementing user related tasks
+    modifying modules to integrate well with users and queries
+    adding ux modules that deal with user queries
+        <reserved>
+    add all path checking algorithms, most efficient algorithm, etc.
+
+then add any other stuff mentioned in the PDF. <reserved>
+
+start work on ui and implementation of UI elements and Design, etc.
+
