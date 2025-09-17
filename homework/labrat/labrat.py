@@ -6,7 +6,6 @@ class Graph:
         self.adj = collections.defaultdict(list)
 
     def add_pipe(self, u, v, cost):
-        """Adds a two-way pipe between junctions u and v with a given cost."""
         self.adj[u].append((v, cost))
         self.adj[v].append((u, cost))
 
@@ -45,14 +44,14 @@ def main():
     for u, v, cost in pipes_data:
         pipe_network.add_pipe(u, v, cost)
 
-    start_junction = 0
-    cheese_junction = 6
+    start_junction = 4
+    cheese_junction = 0
     
     print(f"Help Terry find the cheapest cost from {start_junction} to {cheese_junction}!")
     
     path, cost, visited_count = uniform_cost_search(pipe_network, start_junction, cheese_junction)
     
-    print("\n--- Uniform Cost Search (Lowest Cost Path) ---")
+    print("\n--- Uniform Cost Search ---")
     if path:
         print(f" Path: {' -> '.join(map(str, path))}")
         print(f" Total Cost: {cost}")
