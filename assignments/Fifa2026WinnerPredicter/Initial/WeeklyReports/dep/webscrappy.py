@@ -26,31 +26,11 @@ class PlayerItem(scrapy.Item):
     club = scrapy.Field()
     team_name = scrapy.Field() # To link back to the team
 
-# --- 2. Build Your Spider ---
-# The spider is the core of Scrapy. It crawls websites and extracts data.
 
 class FifaSpider(scrapy.Spider):
-    """
-    A spider to scrape FIFA World Cup team and player data.
-    
-    HOW TO RUN:
-    1. Make sure you have Scrapy installed: `pip install scrapy`
-    2. Save this file as `fifa_scraper_template.py`
-    3. Run it from your terminal: `scrapy runspider fifa_scraper_template.py -o results.csv`
-       (This will save the output to a structured CSV file named `results.csv`)
-    """
-    
-    # This name MUST be unique within your Scrapy project
+
+
     name = 'fifa_spider'
-    
-    # --- IMPORTANT ---
-    # You MUST change this URL to your target website.
-    # A good place to start might be a Wikipedia page, like:
-    # 'https://en.wikipedia.org/wiki/2022_FIFA_World_Cup_squads'
-    #
-    # ALWAYS check the website's 'robots.txt' file first!
-    # (e.g., https://en.wikipedia.org/robots.txt)
-    # --- /IMPORTANT ---
     start_urls = [
         'https://en.wikipedia.org/wiki/2022_FIFA_World_Cup_squads' # <-- *** REPLACE THIS URL ***
     ]
@@ -62,15 +42,8 @@ class FifaSpider(scrapy.Spider):
         It should find all the teams on the starting page and then follow
         the links to each team's individual page.
         """
-        
-        # --- *** EXAMPLE SELECTOR (NEEDS REPLACEMENT) *** ---
-        # This is a HYPOTHETICAL selector. You must inspect your target
-        # website using your browser's Developer Tools to find the real one.
-        # This example assumes teams are in a 'div' with class 'team-card'.
-        #
-        # Use `response.css()` or `response.xpath()`
-        # --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-        team_cards = response.css('div.team-card') # <-- *** REPLACE THIS SELECTOR ***
+
+        team_cards = response.css('div.team-card') 
         
         if not team_cards:
             self.log(f"WARNING: No 'div.team-card' found on {response.url}. Did you use the correct URL and selector?")
@@ -79,33 +52,23 @@ class FifaSpider(scrapy.Spider):
         # Loop through each team card found
         for card in team_cards:
             team_item = TeamItem()
-            
-            # --- *** EXAMPLE SELECTORS (NEEDS REPLACEMENT) *** ---
-            # Extract data using the selectors you found.
-            # `::text` gets the text. `.get()` gets the first result.
-            team_item['team_name'] = card.css('h2.team-name::text').get() # <-- *** REPLACE ***
-            team_item['region'] = card.css('span.team-region::text').get() # <-- *** REPLACE ***
-            
+
+            team_item['team_name'] = card.css('h2.team-name::text').get()
+            team_item['region'] = card.css('span.team-region::text').get()
+
             # Example of extracting a URL to follow
-            team_page_url = card.css('a.team-link::attr(href)').get() # <-- *** REPLACE ***
-            
-            # Clean up the URL (e.g., if it's a relative path like '/team/brazil')
+            team_page_url = card.css('a.team-link::attr(href)').get()
+
+            # Clean up the URL
             if team_page_url:
                 team_item['team_page_url'] = response.urljoin(team_page_url)
 
-            # --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-
-            # First, we yield the team item we just scraped.
-            # The 'meta' dictionary passes data (like the team_name) to the
-            # next callback function (`parse_team_page`).
             yield scrapy.Request(
                 url=team_item['team_page_url'], 
                 callback=self.parse_team_page,
                 meta={'team_name': team_item['team_name']}
             )
             
-            # You could also yield the team item here if you want it in your output
-            # yield team_item
 
     def parse_team_page(self, response):
         """
@@ -113,14 +76,9 @@ class FifaSpider(scrapy.Spider):
         It scrapes the player data from that page.
         """
         
-        # Get the team_name that we passed from the 'parse' method
         current_team_name = response.meta['team_name']
         
-        # --- *** EXAMPLE SELECTOR (NEEDS REPLACEMENT) *** ---
-        # This is a HYPOTHETICAL selector for a table of players.
-        # You must inspect your target website to find the real one.
-        # --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-        player_rows = response.css('table.player-list tr') # <-- *** REPLACE THIS SELECTOR ***
+        player_rows = response.css('table.player-list tr')
         
         if not player_rows:
             self.log(f"WARNING: No 'table.player-list tr' found on {response.url}.")
@@ -130,38 +88,19 @@ class FifaSpider(scrapy.Spider):
         for row in player_rows:
             player_item = PlayerItem()
             
-            # --- *** EXAMPLE SELECTORS (NEEDS REPLACEMENT) *** ---
-            # `td:nth-child(1)` means "the first table cell in the row"
-            player_item['player_name'] = row.css('td:nth-child(1)::text').get() # <-- *** REPLACE ***
-            player_item['position'] = row.css('td:nth-child(2)::text').get() # <-- *** REPLACE ***
-            player_item['age'] = row.css('td:nth-child(3)::text').get() # <-- *** REPLACE ***
-            player_item['club'] = row.css('td:nth-child(4) a::text').get() # <-- *** REPLACE ***
-            
-            # --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+            player_item['player_name'] = row.css('td:nth-child(1)::text').get()
+            player_item['position'] = row.css('td:nth-child(2)::text').get()
+            player_item['age'] = row.css('td:nth-child(3)::text').get()
+            player_item['club'] = row.css('td:nth-child(4) a::text').get()
             
             # Add the team name for context
             player_item['team_name'] = current_team_name
             
-            # Clean up data (example)
             if player_item['age']:
-                # Use a try-except block for safer type conversion
                 try:
                     player_item['age'] = int(player_item['age'])
                 except (ValueError, TypeError):
                     self.log(f"Warning: Could not convert age to int: {player_item['age']}")
-                    player_item['age'] = None # Set to None if conversion fails
+                    player_item['age'] = None
 
-            # 'yield' the item to send it to your output (e.g., the CSV file)
             yield player_item
-
-# --- 3. (Optional) Configure Settings ---
-# To run this script, Scrapy uses default settings.
-# For a real project, you would create a `settings.py` file.
-# Key settings to add there would be:
-#
-# ROBOTSTXT_OBEY = True
-# DOWNLOAD_DELAY = 1  # 1 second delay between requests (BE POLITE!)
-# USER_AGENT = 'WorldCupPredictorBot (your-email@example.com)'
-#
-# --- --- --- --- --- --- --- --- --- --- ---
-
