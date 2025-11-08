@@ -4,8 +4,8 @@ import numpy as np
 import joblib
 import json
 import random
-import subprocess  # For running external scripts
-import re          # For parsing script output
+import subprocess  
+import re          
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout,
     QPushButton, QLabel, QTextEdit, QFrame,
@@ -19,15 +19,15 @@ from PyQt5.QtGui import (
 )
 from PyQt5.QtCore import Qt, QTimer, QRectF, QThread, pyqtSignal
 
-# --- NEW: Matplotlib Imports ---
+
 import matplotlib
-matplotlib.use('Qt5Agg') # Set the backend for PyQt
+matplotlib.use('Qt5Agg')
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import seaborn as sns
 
 
-# --- Color Theme Dictionaries (Unchanged) ---
+# --- Color Theme Dictionaries ---
 DARK_THEME = {
     "WINDOW_BG": "#1e2025",
     "CONTENT_BG": "#2c2e36",
