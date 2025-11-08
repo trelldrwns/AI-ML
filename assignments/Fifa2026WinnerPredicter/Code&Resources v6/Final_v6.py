@@ -90,7 +90,7 @@ class KMeansWorker(QThread):
                         
                     if line.strip() and not line.strip().startswith('cluster') and 'xg_plus_minus_per90' not in line:
                         data_lines.append(line)
-                        found_data = True # We have started reading data
+                        found_data = True 
             
             if not data_lines:
                 raise ValueError("Could not parse cluster summary data lines from script output.")
@@ -148,7 +148,7 @@ class KMeansWorker(QThread):
             self.error.emit(f"Error parsing K-Means output: {e}\n\nFull output was:\n{stdout}")
 
 
-# --- Loading Dialog (Unchanged) ---
+# --- Loading Dialog ---
 class LoadingDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -164,7 +164,7 @@ class LoadingDialog(QDialog):
         self.label.setStyleSheet(f"color: {theme['PRIMARY_TEXT']}; font-size: 14pt; padding: 20px;")
 
 
-# --- GraphicsWidget for the Bracket (Unchanged) ---
+# --- GraphicsWidget for the Bracket ---
 class BracketView(QGraphicsView):
     def __init__(self):
         super().__init__()
@@ -252,7 +252,7 @@ class BracketView(QGraphicsView):
             pass 
 
 
-# --- Odds Widgets (Unchanged) ---
+# --- Odds Widgets ---
 class OddsBarWidget(QWidget):
     def __init__(self, prob_a, prob_b, prob_draw, theme):
         super().__init__()
@@ -314,14 +314,14 @@ class MatchOddsWidget(QFrame):
         self.bar.set_theme(theme)
 
 
-# --- Matplotlib Canvas Widget (Unchanged) ---
+# --- Matplotlib Canvas Widget ---
 class MplCanvas(FigureCanvas):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         self.fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = self.fig.add_subplot(111)
         super(MplCanvas, self).__init__(self.fig)
 
-# --- Data Visuals Tab Widget (BUG FIXES) ---
+# --- Data Visuals Tab Widget ---
 class DataVisualsTab(QWidget):
     def __init__(self):
         super().__init__()
@@ -334,7 +334,6 @@ class DataVisualsTab(QWidget):
             'interceptions', 'aerials_won_pct', 'fouls'
         ]
         self.team_map = {} 
-        # --- FIX: Initialize column_map here ---
         self.column_map = {}
 
         layout = QVBoxLayout(self)
@@ -349,7 +348,6 @@ class DataVisualsTab(QWidget):
 
     def load_data(self, stats_df, column_map):
         self.stats_df = stats_df
-        # --- FIX: Save column_map as a class attribute ---
         self.column_map = column_map
         
         display_features = [column_map[col] for col in self.feature_cols if col in column_map]
