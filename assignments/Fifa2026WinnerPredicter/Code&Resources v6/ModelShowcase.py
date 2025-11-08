@@ -47,9 +47,9 @@ TEAM_BUTTON_SELECTED_STYLE = f"""
 """
 
 # --- Model and Data Paths ---
-RF_MODEL_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/rf_classifier_v3.joblib'
-PREPROCESSOR_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/preprocessor_v3.joblib'
-LABEL_ENCODER_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/label_encoder_v3.joblib'
+RF_MODEL_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/v4_Jobfiles_nobias/rf_classifier_v3.joblib'
+PREPROCESSOR_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/v4_Jobfiles_nobias/preprocessor_v3.joblib'
+LABEL_ENCODER_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/v4_Jobfiles_nobias/label_encoder_v3.joblib'
 TEAM_WIN_RATE_LOOKUP_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/team_win_rate_lookup.json'
 KMEANS_DATA_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/final_team_data.csv'
 KMEANS_MODEL_SCRIPT = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/initialkmeanclustering.py'
