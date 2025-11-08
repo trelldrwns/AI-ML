@@ -46,13 +46,13 @@ LIGHT_THEME = {
 }
 
 # --- Model and Data Paths ---
-RF_MODEL_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/v4/backenddata/rf_classifier_v3.joblib'
-PREPROCESSOR_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/v4/backenddata/preprocessor_v3.joblib'
-LABEL_ENCODER_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/v4/backenddata/label_encoder_v3.joblib'
-TEAM_WIN_RATE_LOOKUP_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/v4/backenddata/team_win_rate_lookup.json'
-KMEANS_DATA_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/v4/backenddata/final_team_data.csv'
-KMEANS_MODEL_SCRIPT = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/v4/backenddata/initialkmeanclustering.py'
-CLUSTER_IMAGE_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/v4/backenddata/cluster_visualization.png'
+RF_MODEL_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/rf_classifier_v3.joblib'
+PREPROCESSOR_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/preprocessor_v3.joblib'
+LABEL_ENCODER_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/label_encoder_v3.joblib'
+TEAM_WIN_RATE_LOOKUP_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/team_win_rate_lookup.json'
+KMEANS_DATA_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/final_team_data.csv'
+KMEANS_MODEL_SCRIPT = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/initialkmeanclustering.py'
+CLUSTER_IMAGE_PATH = '/mnt/khome/requiem/Documents/programs/AI&ML/assignments/Fifa2026WinnerPredicter/Code&Resources v6/backenddata/cluster_visualization.png'
 
 
 # --- K-Means Worker Thread ---
@@ -542,7 +542,6 @@ class DataVisualsTab(QWidget):
         if self.stats_df is None: return
         try:
             self.heatmap_canvas.axes.clear()
-            # Use renamed columns for heatmap labels
             renamed_df = self.stats_df[self.feature_cols].rename(columns=self.column_map)
             corr = renamed_df.corr()
             sns.heatmap(corr, annot=True, fmt=".2f", cmap="vlag", ax=self.heatmap_canvas.axes)
@@ -624,7 +623,6 @@ class DataVisualsTab(QWidget):
 
 # --- Main Application ---
 class FootballPredictorApp(QWidget):
-    # ... (init_ui, load_stats_data, all other methods are unchanged) ...
     def __init__(self):
         super().__init__()
         self.setWindowTitle("FIFA Knockout Stage Simulator")
@@ -1214,7 +1212,6 @@ class FootballPredictorApp(QWidget):
             widget = MatchOddsWidget("Final", res, theme)
             self.odds_layout.addWidget(widget)
         
-        # Apply theme to the new labels
         self.apply_stylesheet(theme)
 
     def clear_odds_widgets(self):
